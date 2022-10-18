@@ -1,5 +1,7 @@
 'use strict';
 
+// const { Chart } = require("chart.js");
+
 // Global Variables
 
 let myContainer = document.querySelector('section');
@@ -107,7 +109,8 @@ function handleClick(e) {
   if (numberOfVotes === maxVotes) {
     myContainer.removeEventListener('click', handleClick);
     resultsButton.className = 'clicks-allowed';
-    resultsButton.addEventListener('click', renderResults)
+    resultsButton.addEventListener('click', renderResults);
+    resultsButton.addEventListener('click', renderChart);
     alert('Please Click: View Results');
   } else {
     renderProduct();
@@ -116,3 +119,57 @@ function handleClick(e) {
 
 myContainer.addEventListener('click', handleClick);
 renderProduct();
+
+// Chart Builder
+
+// Create Labels
+function renderChart() {
+  let labels = [];
+  let votes = [];
+  let numViews = [];
+
+  for(let i = 0; i < allProducts.length; i++) {
+    labels.push(allProducts[i].name);
+    votes.push(allProducts[i].score);
+    numViews.push(allProducts[i].views);
+  }
+  console.log(labels);
+  console.log(votes);
+
+  const ctx = document.getElementById('resultsChart');
+  const resultsChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: '# of Votes',
+        data: votes,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+        ],
+        borderWidth: 1
+      },
+      {
+        label: '# of Views',
+        data: votes,
+        backgroundColor: [
+          'rgba(54, 162, 235, 0.2)',
+        ],
+        borderColor: [
+          'rgba(54, 162, 235, 1)',
+        ],
+        borderWidth: 1
+    }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}
