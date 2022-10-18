@@ -7,42 +7,46 @@ main {
   margin: 10px;
   background-color: rgb(227, 227, 227);
   display: grid;
-  grid-template-columns: 20% 20% 20% 20% 20%;
-  grid-template-rows: 20% 20% 20% 20% 20%;
+  grid-template-columns: repeat(10, 10%);
+  grid-template-rows: 5rem 5rem 5rem 5rem 5rem 5rem 120px 120px 120px 120px 120px 120px;
 }
 
 h1 {
   font-size: x-large;
   font-weight: bold;
-  grid-column: 2 / 4;
-  grid-row-start: 1;
+  grid-column: 2 / 5;
+  grid-row: 1 / 3;
+  margin: auto;
 }
 
 h2 {
   font-size: x-large;
   font-weight: bold;
-  grid-column: 3 / 5;
-  grid-row-start: 2;
-  
+  grid-column: 3 / 10;
+  grid-row-start: 3;
+  margin: auto;
 }
+
 #logo {
-  height: 100px;
+  height: 150px;
+  grid-row: 1 / 2;
+  grid-column-start: 1;
 }
 
 section {
-  grid-row: 3 / 5;
-  grid-column: 2 / 5;
+  grid-row-start: 4;
+  grid-column: 3 / 10;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
 }
 
 section img {
+  width: 280px;
+  height: 280px;
   vertical-align: middle;
-  width: 300px;
-  height: 300px;
   object-fit: fill;
-  border: 3px solid black;
+  border: 5px solid black;
 }
 
 section img:hover {
@@ -50,19 +54,32 @@ section img:hover {
 }
 
 #results {
-  grid-column: 1 / 2;
-  grid-row: 3 / 6;
+  grid-column: 1 / 3;
+  grid-row-start: 3;
+  margin-left: 20px;
   text-align: center;
-  border: 2px solid black;
+}
+
+li span {
+  position: relative;
+  margin: auto;
 }
 
 ul li {
-  grid-column: 1 / 2;
-  grid-row: 3 / 6;
+  margin-top: 5px;
+  grid-column: 1 / 3;
+  grid-row: 3;
+  padding-left: 0;
+}
+
+ul {
+  list-style-position: inside;
+  list-style-type: disc;
   text-align: left;
 }
 
 .clicks-allowed {
+  padding: 10px;
   background-color: lightslategray;
   color: antiquewhite;
   font-weight: bold;
@@ -72,3 +89,39 @@ ul li {
   background-color: antiquewhite;
   color: black;
 }
+
+footer {
+  font-weight: bold;
+  grid-row: 6;
+  grid-column: 1 / 6;
+  background-color: rgb(157, 157, 157);
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+h3 {
+  margin: auto;
+}
+
+button {
+  color:rgb(227, 227, 227);
+  background-color: rgb(227, 227, 227);
+  border: none;
+}
+
+#chart {
+  height: 500px;
+  min-width: 900px;
+  max-width: 900px;
+  grid-row: 8 / 10;
+  grid-column: 4 / 10;
+}
+
+/* #resultsChart {
+  height: 500px;
+  min-width: 900px;
+  max-width: 900px;
+  grid-row: 8 / 10; 
+  grid-column: 4 / 11;
+} */
