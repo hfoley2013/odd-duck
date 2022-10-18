@@ -5,7 +5,7 @@
 // Global Variables
 
 let myContainer = document.querySelector('section');
-let resultsButton = document.querySelector('section + div');
+let resultsButton = document.querySelector('button');
 let results = document.querySelector('ul');
 
 let image1 = document.querySelector('section img:first-child');
@@ -13,7 +13,7 @@ let image2 = document.querySelector('section img:nth-child(2)');
 let image3 = document.querySelector('section img:nth-child(3)');
 
 let numberOfVotes = 0;
-let maxVotes = 25;
+let maxVotes = 1;
 let allProducts = [];
 let seenProductsArr = [];
 
@@ -86,7 +86,9 @@ function renderProduct() {
 function renderResults() {
   for (let i = 0; i < allProducts.length; i++) {
     let li = document.createElement('li');
-    li.textContent = `${allProducts[i].name} had ${allProducts[i].score} votes and was seen ${allProducts[i].views} times.`;
+    let span = document.createElement('span');
+    span.textContent = `${allProducts[i].name} had ${allProducts[i].score} votes and was seen ${allProducts[i].views} times.`;
+    li.appendChild(span);
     results.appendChild(li);
   }
 }
@@ -121,6 +123,8 @@ myContainer.addEventListener('click', handleClick);
 renderProduct();
 
 // Chart Builder
+myChart.defaults.scales.color = 'red';
+myChart.defaults.font.weight = bold;
 
 // Create Labels
 function renderChart() {
@@ -196,7 +200,14 @@ function renderChart() {
       scales: {
         y: {
           beginAtZero: true
-        }
+        },
+        xAxes: [{
+          ticks: {
+            fontSize: 14,
+            fontColor: '#000000',
+            fontStyle: 'bold'
+          }
+        }]
       }
     }
   });
