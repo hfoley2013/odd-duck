@@ -2,3 +2,59 @@
   outline: 1px solid red;
   outline-offset: -1px;
 } */
+
+main {
+  margin: 10px;
+  background-color: rgb(227, 227, 227);
+}
+
+
+#header {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+
+h1 {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: x-large;
+  font-weight: bold;
+  
+}
+#logo {
+  height: 100px;
+}
+
+section {
+  margin: 2px;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  grid-template-rows: 1r;
+}
+
+section img {
+  justify-content: space-between;
+  width: 80%;
+  vertical-align: middle;
+  grid-row-start: 1 / 2;
+}
+
+#results {
+  color: rgb(227, 227, 227);
+}
+
+.clicks-allowed {
+  background-color: lightslategray;
+  color: antiquewhite;
+  font-weight: bold;
+}
+
+.clicks-allowed:hover {
+  background-color: antiquewhite;
+  color: lightslategray;
+}
