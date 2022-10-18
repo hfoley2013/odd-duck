@@ -127,7 +127,8 @@ function renderChart() {
   let labels = [];
   let votes = [];
   let numViews = [];
-
+  
+  // Create Arrays for Sorting
   for(let i = 0; i < allProducts.length; i++) {
     labels.push(allProducts[i].name);
     votes.push(allProducts[i].score);
@@ -136,14 +137,41 @@ function renderChart() {
   console.log(labels);
   console.log(votes);
 
+  // Merge Arrays
+  let merged = labels.map((label, i) => {
+    return {
+      'label': labels[i],
+      'votes': votes[i],
+      'views': numViews[i]
+    }
+  });
+  // console.log(merged);
+
+  // Sort Arrays by Votes
+  let sortArray = merged.sort(function(a, b) {
+    return b.votes - a.votes
+  });
+
+  // console.log(sortArray);
+
+  let sortedLabels = [];
+  let sortedVotes = [];
+  let sortedViews = [];
+
+  for (let i = 0; i < sortArray.length; i++) {
+    sortedLabels.push(sortArray[i].label);
+    sortedVotes.push(sortArray[i].votes);
+    sortedViews.push(sortArray[i].views);
+  }
+
   const ctx = document.getElementById('resultsChart');
-  const resultsChart = new Chart(ctx, {
+  new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: labels,
+      labels: sortedLabels,
       datasets: [{
         label: '# of Votes',
-        data: votes,
+        data: sortedVotes,
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
         ],
@@ -154,7 +182,7 @@ function renderChart() {
       },
       {
         label: '# of Views',
-        data: votes,
+        data: sortedViews,
         backgroundColor: [
           'rgba(54, 162, 235, 0.2)',
         ],
