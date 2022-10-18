@@ -13,6 +13,7 @@ let image3 = document.querySelector('section img:nth-child(3)');
 let numberOfVotes = 0;
 let maxVotes = 25;
 let allProducts = [];
+let seenProductsArr = [];
 
 function Product(name, fileType = 'jpg') {
   this.name = name;
@@ -53,35 +54,30 @@ function selectRandomProduct() {
 }
 
 function renderProduct() {
-  let product1 = selectRandomProduct();
-  let product2 = selectRandomProduct();
-  let product3 = selectRandomProduct();
 
-  while(product1 == product2) {
-    product2 = selectRandomProduct();
+  while(seenProductsArr.length < 6) {
+    let product = selectRandomProduct();
+    if(!seenProductsArr.includes(product)) {
+      seenProductsArr.push(product);
+    }
   }
-  while(product1 == product3) {
-    product3 = selectRandomProduct();
-  }
-  while(product2 == product3){
-    product3 = selectRandomProduct();
-  }
-  console.log(product1, product2, product3);
+
+  let product1 = seenProductsArr.shift()
+  let product2 = seenProductsArr.shift()
+  let product3 = seenProductsArr.shift()
 
   image1.src = allProducts[product1].src;
   image1.alt = allProducts[product1].alt;
   allProducts[product1].views++;
-  // console.log(allProducts[product1]);
+
 
   image2.src = allProducts[product2].src;
   image2.alt = allProducts[product2].alt;
   allProducts[product2].views++;
-  // console.log(allProducts[product2]);
 
   image3.src = allProducts[product3].src;
   image3.alt = allProducts[product3].alt;
   allProducts[product3].views++;
-  // console.log(allProducts[product3]);
 
 }
 
@@ -98,13 +94,12 @@ function handleClick(e) {
     alert('Please click an image');
     break;
   }
-  console.log(e.target.alt);
   numberOfVotes++;
   let clickedProduct = e.target.alt;
+  console.log(clickedProduct);
 
   for (let i = 0; i < allProducts.length; i++) {
     if (clickedProduct === allProducts[i].name) {
-      console.log(allProducts[i]);
       allProducts[i].score++;
       break;
     }
