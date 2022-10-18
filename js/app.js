@@ -103,7 +103,7 @@ function handleClick(e) {
   let clickedProduct = e.target.alt;
 
   for (let i = 0; i < allProducts.length; i++) {
-    if (e.target.alt === allProducts[i].name) {
+    if (clickedProduct === allProducts[i].name) {
       console.log(allProducts[i]);
       allProducts[i].score++;
       break;
