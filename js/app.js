@@ -13,7 +13,7 @@ let image2 = document.querySelector('section img:nth-child(2)');
 let image3 = document.querySelector('section img:nth-child(3)');
 
 let numberOfVotes = 0;
-let maxVotes = 1;
+let maxVotes = 25;
 let allProducts = [];
 let seenProductsArr = [];
 
