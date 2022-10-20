@@ -27,6 +27,34 @@ function Product(name, fileType = 'jpg') {
   allProducts.push(this);
 }
 
+// Data Storage
+function makeProduct() {
+  let myProduct = new Product(name, fileType);
+  allProducts.push(myProduct);
+  myProduct.renderProduct();
+}
+
+function storeProducts() {
+  console.log(`Product pre String: ${allProducts}`);
+  let strProducts = JSON.stringify(allProducts);
+  console.log(`Product post String: ${strProducts}`);
+  localStorage.setItem('products', strProducts);
+}
+
+function getProducts() {
+  let storedProducts = localStorage.getItem('products');
+  if(storedProducts) {
+    let parsedProducts = JSON.parse(storeProducts);
+    console.log(`Parsed Products: ${parsedProducts}`);
+    for(product of parsedProducts) {
+      console.log(`for product of parsedProducts: ${product}`);
+      let name = product.name;
+      let fileType = product.fileType;
+      makeProduct(name, fileType);
+    }
+  }
+}
+
 // List of Products
 new Product('bag');
 new Product('banana');
@@ -64,9 +92,9 @@ function renderProduct() {
     }
   }
 
-  let product1 = seenProductsArr.shift()
-  let product2 = seenProductsArr.shift()
-  let product3 = seenProductsArr.shift()
+  let product1 = seenProductsArr.shift();
+  let product2 = seenProductsArr.shift();
+  let product3 = seenProductsArr.shift();
 
   image1.src = allProducts[product1].src;
   image1.alt = allProducts[product1].alt;
@@ -101,10 +129,11 @@ function handleClick(e) {
   numberOfVotes++;
   let clickedProduct = e.target.alt;
   console.log(clickedProduct);
-
+  
   for (let i = 0; i < allProducts.length; i++) {
     if (clickedProduct === allProducts[i].name) {
       allProducts[i].score++;
+      storeProducts();
       break;
     }
   }
@@ -212,3 +241,4 @@ function renderChart() {
     }
   });
 }
+getProducts();
